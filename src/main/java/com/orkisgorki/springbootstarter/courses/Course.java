@@ -1,11 +1,11 @@
-package com.orkisgorki.springbootstarter.topic;
+package com.orkisgorki.springbootstarter.courses;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.orkisgorki.springbootstarter.topic.Topic;
+
+import javax.persistence.*;
 
 @Entity
-public class Topic {
+public class Course {
 
     @Id
     @Column
@@ -13,13 +13,17 @@ public class Topic {
     private String name;
     private String description;
 
-    public Topic() {
+    @ManyToOne
+    private Topic topic;
+
+    public Course() {
     }
 
-    public Topic(String id, String name, String description) {
+    public Course(String id, String name, String description, Topic topic) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.topic = topic;
     }
 
     public String getId() {
@@ -44,5 +48,13 @@ public class Topic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

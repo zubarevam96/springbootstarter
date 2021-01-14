@@ -15,7 +15,7 @@ public class TopicController {
     private TopicService topicService;
 
     @RequestMapping("/topics")
-    public List<Topic> getAllTopics() {
+    public List<Topic> getAllCourses() {
         return topicService.getAllTopics();
     }
 
@@ -38,7 +38,7 @@ public class TopicController {
     @RequestMapping(method = RequestMethod.PUT, value = "/topics")
     public void updateTopic(@RequestBody Topic topic) {
         try {
-            topicService.putTopic(topic);
+            topicService.update(topic);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, e.getMessage()
@@ -48,12 +48,6 @@ public class TopicController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/topics")
     public void deleteTopic(@RequestBody String id) {
-        try {
-            topicService.deleteTopic(id);
-        } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, e.getMessage()
-            );
-        }
+        topicService.deleteTopic(id);
     }
 }
